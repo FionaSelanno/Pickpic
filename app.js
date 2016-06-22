@@ -14,13 +14,24 @@ jQuery(document).ready(function() {
       for ( i = 0; i < imageUrls.length; i++ ) {
 
          var thumbImgElem = $( "<img/>" )
+            .addClass( 'thumb' )
             .attr( 'id', "thumb" + i )
-            .attr( 'src', imageUrls[i] );
+            .attr( 'src', imageUrls[i] )
+            .data( 'index', i );
 
-         thumbsContainerElem.append( thumbImgElem );
+            thumbImgElem.bind( 'click', selectPic );
+
+            thumbsContainerElem.append( thumbImgElem );
       }
-
    }
+
+   function selectPic() {
+    var thumbImgElem = $( this );
+
+    i = thumbImgElem.data( 'index' );
+
+    $( "img#pic" ).attr( 'src', imageUrls[i] );
+ }
 
    initialize();
 });
